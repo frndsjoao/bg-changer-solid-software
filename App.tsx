@@ -1,14 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
+  const [backgroundColor, setBackgroundColor] = useState("rgb(244, 128, 245)")
+
+  function handleChangeBackground() {
+    const r = Math.floor(Math.random() * 255)
+    const g = Math.floor(Math.random() * 255)
+    const b = Math.floor(Math.random() * 255)
+
+    setBackgroundColor(`rgb(${r}, ${g}, ${b})`)
+  }
+
+
   return (
     <>
       <StatusBar style="auto" />
 
-      <View style={[styles.container]}>
-        <Pressable style={styles.pressableBg}>
+      <View style={[styles.container, { backgroundColor }]}>
+        <Pressable style={styles.pressableBg} onPress={handleChangeBackground}>
 
           <Text style={styles.text}>Hello there!</Text>
 
@@ -32,6 +43,5 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "rgb(244, 128, 245)"
   },
 });
